@@ -11,16 +11,7 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 database.connectdb();
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "./uploads");
-    },
-    filename: function (req, file, cb) {
-        console.log(file);
-        const uniqueSuffix = file.originalname;
-        cb(null, uniqueSuffix);
-    },
-});
+const storage = multer.diskStorage({});
 
 
 app.use(cors());
