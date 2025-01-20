@@ -39,8 +39,6 @@ cloudinary.config({
 });
 
 app.post("/images", upload.single("avatar"), async (req, res, next) => {
-
-
     const uploadResult = await cloudinary.uploader
         .upload(
             req.file.path, {
@@ -56,11 +54,11 @@ app.post("/images", upload.single("avatar"), async (req, res, next) => {
         urls: uploadResult.url
     }
     database.addUsers(user);
+   
     res.redirect(process.env.CLIENT_URL);
 });
 app.get("/allUsers", (req, res) => {
     database.getUsers().then((users) => {
-        // console.log(users);
         res.send(users)
     }).catch((err) => {
         console.log("error in gettting user", err);
@@ -69,7 +67,6 @@ app.get("/allUsers", (req, res) => {
 });
 
 app.post("/getusr", (req, res) => {
-    console.log(req.body);
     database.getuser(req.body.name).then((users) => {
         res.send(users)
     }).catch((err) => {
